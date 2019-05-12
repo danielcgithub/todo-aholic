@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 
 
 // ToDo Connect to Mongo instance
+const dbHost = 'mongodb://database/mean-docker';
 
 // Creating Mongoose Schema
 const Todo = mongoose.model('Todo', {
@@ -31,7 +32,7 @@ router.get('/api/todos', function (req, res) {
 
 
 // create todo and send back all todos after creation
-app.post('/api/todos', function (req, res) {
+router.post('/api/todos', function (req, res) {
 
   // create a todo, information comes from AJAX request from Angular
   Todo.create({
@@ -52,7 +53,7 @@ app.post('/api/todos', function (req, res) {
 });
 
 // delete a todo
-app.delete('/api/todos/:todo_id', function (req, res) {
+router.delete('/api/todos/:todo_id', function (req, res) {
   Todo.remove({
     _id: req.params.todo_id
   }, function (err, todo) {
