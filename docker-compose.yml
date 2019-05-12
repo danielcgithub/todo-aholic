@@ -2,11 +2,11 @@ version: '2'  # specify docker-compose version
 
 services:
   angular: #name of first service
-    image: todo-angular-client:v2 # specify the image name that you have built using corresponding dockerfile
+    image: todo-angular-client:v7 # specify the image name that you have built using corresponding dockerfile
     ports:
       - "4200:4200" #specify port forwarding
   express: #name of the second service
-    image: todo-express-server:v3 # specify the image name that you have built using corresponding dockerfile
+    image: todo-express-server:v5 # specify the image name that you have built using corresponding dockerfile
     ports:
       - "3000:3000" #specify ports forwarding
     links:

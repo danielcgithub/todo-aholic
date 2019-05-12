@@ -3,8 +3,10 @@ var router = express.Router();
 var mongoose = require('mongoose');
 
 
-// ToDo Connect to Mongo instance
 const dbHost = 'mongodb://database/mean-docker';
+
+// Connect to mongodb
+mongoose.connect(dbHost);
 
 // Creating Mongoose Schema
 const Todo = mongoose.model('Todo', {
