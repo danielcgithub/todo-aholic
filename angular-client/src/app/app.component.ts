@@ -26,8 +26,8 @@ export class AppComponent {
 
   getAllToDos() {
     this.http.get(`${this.API}/api/todos`).subscribe((todos: any) => {
-      console.log(todos)
       this.todos = todos
+      console.log(todos)
     })
   }
 

@@ -10,34 +10,26 @@
   <h1>I'm a Todo-aholic <span class="label label-info">{{ todos.length }}</span></h1>
 </div>
 
-<!-- TODO LIST -->
-<div id="todo-list" class="row">
-  <div class="col-sm-4 col-sm-offset-4">
-
-    <!-- LOOP OVER THE TODOS IN $scope.todos -->
-    <div class="checkbox" *ngFor="let todo of todos">
-      <label>
-        <input type="checkbox" (click)="deleteTodo(todo._id)"> {{ todo.text }}
-      </label>
-    </div>
-
-  </div>
-</div>
-
 
 <!-- FORM TO CREATE TODOS -->
 <div id="todo-form" class="row">
   <div class="col-sm-8 col-sm-offset-2 text-center">
     <form>
       <div class="form-group">
-        <label for="todoitem">What is your todo?</label>
-        <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-        <input type="text" class="form-control input-lg text-center" id="todoitem" #todoitem
-          placeholder="Input todo here">
+        <label for="todotext">What is your todo? </label>
+        <input type="text" class="form-control" id="todotext" #todotext placeholder="Input todo here">
       </div>
 
       <!-- createToDo() WILL CREATE NEW TODOS -->
-      <button type="submit" (click)="createTodo(todoitem.value)" class="btn btn-primary btn-lg">Add todo item</button>
+      <button type="button" (click)="createTodo(todotext.value)" class="btn btn-primary">Add todo item</button>
     </form>
+  </div>
+
+  <!-- TODO LIST -->
+  <h3>Todos</h3>
+  <div *ngFor="let todo of todos">
+    <label>
+      <input type="checkbox" (click)="deleteTodo(todo._id)">{{ todo.todotext }}
+    </label>
   </div>
 </div>

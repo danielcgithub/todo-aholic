@@ -10,7 +10,7 @@ mongoose.connect(dbHost);
 
 // Creating Mongoose Schema
 const Todo = mongoose.model('Todo', {
-  text: String
+  todotext: String
 });
 
 /* GET home page. */
@@ -19,43 +19,32 @@ router.get('/', function (req, res, next) {
 });
 
 // get all todos
-router.get('/api/todos', function (req, res) {
-
-  // use mongoose to get all todos in the database
-  Todo.find(function (err, todos) {
-
-    // if there is an error retrieving, send the error. nothing after res.send(err) will execute
+router.get('/api/todos', (req, res) => {
+  Todo.find({}, (err, todos) => {
     if (err)
       res.send(err)
-
-    res.json(todos); // return all todos in JSON format
+    res.status(200).json(todos);
   });
 });
 
-
 // create todo and send back all todos after creation
-router.post('/api/todos', function (req, res) {
-
-  // create a todo, information comes from AJAX request from Angular
-  Todo.create({
-    text: req.body.text,
-    done: false
-  }, function (err, todo) {
-    if (err)
-      res.send(err);
-
-    // get and return all the todos after you create another
-    Todo.find(function (err, todos) {
-      if (err)
-        res.send(err)
-      res.json(todos);
-    });
+router.post('/api/todos', (req, res) => {
+  let todo = new Todo({
+    todotext: req.body.todotext
   });
+
+  todo.save(error => {
+    if (error) res.status(500).send(error);
+
+    res.status(201).json({
+      message: 'todo created successfully'
+    });
+  })
 
 });
 
 // delete a todo
-router.delete('/api/todos/:todo_id', function (req, res) {
+router.delete('/api/todos/:todo_id', (req, res) => {
   Todo.remove({
     _id: req.params.todo_id
   }, function (err, todo) {
